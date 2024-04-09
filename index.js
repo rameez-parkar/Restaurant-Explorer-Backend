@@ -38,7 +38,7 @@ app.post('/reservations', authenticateToken, reservationController.getReservatio
 // Cancel Reservation service
 app.post('/cancel-reservation', authenticateToken, reservationController.cancelReservation);
 
-// // const PORT = 3000;
-// // app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// const PORT = 3000;
+// app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 module.exports.handler = serverless(app);
