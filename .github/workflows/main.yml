@@ -1,0 +1,30 @@
+name: Zip and Upload to S3
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      
+    - name: Zip files
+      run: zip -r restaurant-explorer.zip .
+
+    - name: Upload to S3
+      uses: jakejarvis/s3-sync-action@master
+      with:
+        args: --acl public-read --delete
+      env:
+        AWS_S3_BUCKET: restaurant-explorer-bucket
+        AWS_ACCESS_KEY_ID: ASIAQ3EGPJQX6HVAMJL5
+        AWS_SECRET_ACCESS_KEY: QnfSX8MASOf/HwClE/ViMKBMxjRaKFiUqZB5GfP1
+        AWS_REGION: us-east-1
+        SOURCE_DIR: .
+        DEST_DIR: /
+
